@@ -11,6 +11,10 @@ namespace todos.Controllers
     [ApiController]
     public class TodosController : ControllerBase
     {
+        // private IRepository variable
+
+        // constructor that injects an object of type IRepository 
+        
         private static List<string> all = new List<string>()
         {
             "Remodel Bathroom",
@@ -20,13 +24,13 @@ namespace todos.Controllers
 
         // GET: api/Todos
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public IEnumerable<string> Get()
         {
             return all;
         }
 
         // GET: api/Todos/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
@@ -34,7 +38,7 @@ namespace todos.Controllers
 
         // POST: api/Todos
         [HttpPost]
-        public ActionResult<IEnumerable<string>> Post([FromBody] string todo)
+        public IEnumerable<string> Post([FromBody] string todo)
         {
             all.Add(todo);
             return all;
