@@ -1,6 +1,5 @@
 function getRequest(location, callback) {
     fetch(location)
-    .then(data => console.log(data))
     .then(response => response.json())
     .then(data => callback(data))
     .catch(err => console.log(err))

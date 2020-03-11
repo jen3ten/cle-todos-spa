@@ -28,7 +28,7 @@ namespace todos.Controllers
         public IEnumerable<string> Get()
         {
             // return all;
-            return new string[] { "one", "two", "three" };
+            return all;
         }
 
         // GET: api/Todos/5
