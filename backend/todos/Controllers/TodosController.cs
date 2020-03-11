@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,7 +27,8 @@ namespace todos.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return all;
+            // return all;
+            return new string[] { "one", "two", "three" };
         }
 
         // GET: api/Todos/5
