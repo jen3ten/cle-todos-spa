@@ -1,6 +1,5 @@
 function getRequest(location, callback) {
-    console.log(location)
-    fetch(location, {mode: 'no-cors'})
+    fetch(location)
     .then(data => console.log(data))
     .then(response => response.json())
     .then(data => callback(data))
