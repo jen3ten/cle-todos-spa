@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,12 +20,35 @@ namespace todos
             Configuration = configuration;
         }
 
+        // .net 3.1 for cors
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            // .net 3.1 for cors
+            services.AddCors(options =>
+            {
+                options.AddPolicy(MyAllowSpecificOrigins,
+                builder =>
+                {
+                    builder.WithOrigins("http://localhost:8080",
+                                        "https://localhost:8080")
+                                        .AllowAnyHeader()
+                                        .AllowAnyMethod();
+                });
+            });
+
+            // old .net method?
+            //services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            //{
+            //    builder.AllowAnyOrigin()
+            //            .AllowAnyMethod()
+            //            .AllowAnyHeader();
+            //}));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,6 +58,9 @@ namespace todos
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            // .net 3.1 cors stuff?
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseHttpsRedirection();
 
@@ -49,3 +75,4 @@ namespace todos
         }
     }
 }
+
