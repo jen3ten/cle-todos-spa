@@ -32,7 +32,6 @@ function navHome() {
 function navTodos() {
   const todosButton = document.querySelector(".nav__todos");
   todosButton.addEventListener("click", function() {
-    // document.querySelector('#app').innerHTML = Todos();
     apiActions.getRequest("https://localhost:44393/api/todos", toDos => {
       console.log(toDos);
     document.querySelector("#app").innerHTML = Todos(toDos);
