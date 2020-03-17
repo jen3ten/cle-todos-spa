@@ -31,12 +31,34 @@ function navHome() {
 
 function navTodos() {
   const todosButton = document.querySelector(".nav__todos");
+  const app = document.querySelector("#app");
+
   todosButton.addEventListener("click", function() {
-    // document.querySelector('#app').innerHTML = Todos();
     apiActions.getRequest("https://localhost:44393/api/todos", toDos => {
       console.log(toDos);
-    document.querySelector("#app").innerHTML = Todos(toDos);
+    app.innerHTML = Todos(toDos);
     });
   });
+
+  app.addEventListener("click", function(){
+    if (event.target.classList.contains("add-todo__submit")){
+      const todo = event.target.parentElement.querySelector(".add-todo__todoName").value;
+
+      console.log(todo);
+
+      apiActions.postRequest(
+        "https://localhost:44393/api/todos",
+        {
+          name: todo
+        },
+        toDos => {
+          console.log("these are all the todos returned from back end:")
+          console.log(toDos);
+          // document.querySelector("#app").innerHTML = Todos(toDos);
+        }
+      );
+    }
+
+  })
 }
 
