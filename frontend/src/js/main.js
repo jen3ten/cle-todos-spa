@@ -1,6 +1,7 @@
 import Header from './components/Header';
 import Home from './components/Home';
 import Todos from './components/Todos';
+import TodoEdit from './components/TodoEdit';
 import apiActions from './api/apiActions';
 
 export default pageBuild;
@@ -16,11 +17,6 @@ function header() {
     const header = document.querySelector("#header");
     header.innerHTML = Header(); 
 }
-  
-// function footer() {
-//     const footer = document.querySelector("#footer");
-//     footer.innerHTML = Footer();
-// }
 
 function navHome() {
   const homeButton = document.querySelector(".nav__home");
@@ -29,7 +25,6 @@ function navHome() {
   });
 }
 
-//const todosButton = document.querySelector(".nav__todos");
 function navTodo() {
     const todosButton = document.querySelector(".nav__todos");
     const app = document.querySelector('#app');
@@ -42,8 +37,6 @@ function navTodo() {
             }
         )
       });
-
-    //todoButtonClick();
 
     app.addEventListener("click", function(){
         if(event.target.classList.contains('add-todo__submit')){
@@ -67,7 +60,6 @@ function navTodo() {
     })
 
     app.addEventListener("click", function(){
-      console.log(event.target);
       if(event.target.classList.contains('delete-todo__submit')){
         const todoId = event.target.parentElement.querySelector('.todo__id').value;
         console.log(todoId);
@@ -80,14 +72,43 @@ function navTodo() {
         )
       }
     })
+
+    app.addEventListener("click", function(){
+      if(event.target.classList.contains('edit-todo__edit')){
+        const todoId = event.target.parentElement.querySelector('.todo__id').value;
+        console.log(todoId);
+
+        apiActions.getRequest(
+          `https://localhost:44393/api/todo/${todoId}`,
+          toDoEdit => {
+            console.log(toDoEdit);
+            app.innerHTML = TodoEdit(toDoEdit);
+          }
+        )
+      }
+    })
+
+    app.addEventListener("click", function(){
+      if(event.target.classList.contains('update-todo__submit')){
+        const todoId = event.target.parentElement.querySelector('.update-todo__id').value;
+        const todoName = event.target.parentElement.querySelector('.update-todo__name').value;
+        const todoOwner = event.target.parentElement.querySelector('.update-todo__owner').value;
+
+        const todoData = {
+          Id: todoId,
+          Name: todoName,
+          Owner: todoOwner
+        };
+
+        apiActions.putRequest(
+          `https://localhost:44393/api/todo/${todoId}`,
+          todoData,
+          todos => {
+            console.log(todos);
+            app.innerHTML = Todos(todos);
+          }
+        );
+      }
+    });
+
   }
-
-// var todoButtonClick = todosButton.addEventListener("click", function() {
-//   apiActions.getRequest("https://localhost:44393/api/todo",
-//       todos => {
-//           console.log(todos);
-//           app.innerHTML = Todos(todos);
-//       }
-//   )
-// });
-
