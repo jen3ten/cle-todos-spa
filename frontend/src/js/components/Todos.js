@@ -5,7 +5,7 @@ export default function Todos(todos){
         ${todos.map(todo => {
             return `
             <li>
-                <h4>${todo.name} by ${todo.owner}</h4>
+                <h4 class="todo__items">${todo.name} by ${todo.owner}</h4>
                 <button class="delete-todo__submit">Delete</button>
                 <input class="todo__id" type="hidden" value="${todo.id}">
             </li>
