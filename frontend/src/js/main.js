@@ -9,7 +9,7 @@ function pageBuild() {
     header();
     // footer();
     navHome();
-    navTodos();
+    navTodo();
 }
 
 function header() {
@@ -29,36 +29,38 @@ function navHome() {
   });
 }
 
-function navTodos() {
+function navTodo() {
   const todosButton = document.querySelector(".nav__todos");
-  const app = document.querySelector("#app");
+    const app = document.querySelector('#app');
 
-  todosButton.addEventListener("click", function() {
-    apiActions.getRequest("https://localhost:44393/api/todos", toDos => {
-      console.log(toDos);
-    app.innerHTML = Todos(toDos);
-    });
-  });
+    todosButton.addEventListener("click", function() {
+        apiActions.getRequest("https://localhost:44393/api/todo",
+            todos => {
+                console.log(todos);
+                app.innerHTML = Todos(todos);
+            }
+        )
+      });
 
-  app.addEventListener("click", function(){
-    if (event.target.classList.contains("add-todo__submit")){
-      const todo = event.target.parentElement.querySelector(".add-todo__todoName").value;
+    app.addEventListener("click", function(){
+        if(event.target.classList.contains('add-todo__submit')){
+            const todo = event.target.parentElement.querySelector('.add-todo__todoName').value;
+            console.log(todo);
 
-      console.log(todo);
-
-      apiActions.postRequest(
-        "https://localhost:44393/api/todos",
-        {
-          name: todo
-        },
-        toDos => {
-          console.log("these are all the todos returned from back end:")
-          console.log(toDos);
-          // document.querySelector("#app").innerHTML = Todos(toDos);
+            var requestBody = {
+              Name: todo,
+              Owner: "Jen"
+            }
+            apiActions.postRequest(
+                "https://localhost:44393/api/todo",
+                requestBody,
+                toDos => {
+                    console.log("Todos returned from back end");
+                    console.log(toDos);
+                    app.innerHTML = Todos(toDos);
+                }
+            )
         }
-      );
-    }
-
-  })
-}
+    })
+  }
 
