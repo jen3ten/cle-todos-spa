@@ -18,17 +18,25 @@ function getRequest(location, callback) {
     .catch(err => console.log(err))
   }
   
-  function deleteRequest(location, callback) {
-    // stay tuned
-  }
+function deleteRequest(location, callback) {
+  fetch(location, {
+    method: 'DELETE',
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+  .then(response => response.json())
+  .then(data => callback(data))
+  .catch(err => console.log(err))
+}
   
-  function putRequest(location, requestBody, callback) {
+function putRequest(location, requestBody, callback) {
     // stay tuned
-  }
+}
   
-  export default {
+export default {
     getRequest,
     postRequest,
     deleteRequest,
     putRequest
-  };
+};
