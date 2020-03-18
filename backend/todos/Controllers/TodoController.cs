@@ -21,21 +21,21 @@ namespace todos.Controllers
             this.todoRepo = todoRepo;
         }
 
-        // GET api/todos
+        // GET api/todo
         [HttpGet]
         public IEnumerable<Todo> Get()
         {
             return todoRepo.GetAll();
         }
 
-        // GET api/todos/5
+        // GET api/todo/5
         [HttpGet("{id}")]
         public Todo Get(int id)
         {
             return todoRepo.GetById(id);
         }
 
-        // POST api/todos
+        // POST api/todo
         [HttpPost]
         public IEnumerable<Todo> Post([FromBody] Todo todo)
         {
@@ -43,7 +43,7 @@ namespace todos.Controllers
             return todoRepo.GetAll();
         }
 
-        // PUT api/todos/5
+        // PUT api/todo/5
         [HttpPut("{id}")]
         public IEnumerable<Todo> Put([FromBody] Todo todo)
         {
@@ -51,7 +51,7 @@ namespace todos.Controllers
             return todoRepo.GetAll();
         }
 
-        // DELETE api/todos/5
+        // DELETE api/todo/5
         [HttpDelete("{id}")]
         public IEnumerable<Todo> Delete(int id)
         {
