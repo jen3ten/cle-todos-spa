@@ -29,8 +29,9 @@ function navHome() {
   });
 }
 
+//const todosButton = document.querySelector(".nav__todos");
 function navTodo() {
-  const todosButton = document.querySelector(".nav__todos");
+    const todosButton = document.querySelector(".nav__todos");
     const app = document.querySelector('#app');
 
     todosButton.addEventListener("click", function() {
@@ -41,6 +42,8 @@ function navTodo() {
             }
         )
       });
+
+    //todoButtonClick();
 
     app.addEventListener("click", function(){
         if(event.target.classList.contains('add-todo__submit')){
@@ -62,5 +65,29 @@ function navTodo() {
             )
         }
     })
+
+    app.addEventListener("click", function(){
+      console.log(event.target);
+      if(event.target.classList.contains('delete-todo__submit')){
+        const todoId = event.target.parentElement.querySelector('.todo__id').value;
+        console.log(todoId);
+
+        apiActions.deleteRequest(
+          `https://localhost:44393/api/todo/${todoId}`,
+          toDos => {
+            app.innerHTML = Todos(toDos);
+          }
+        )
+      }
+    })
   }
+
+// var todoButtonClick = todosButton.addEventListener("click", function() {
+//   apiActions.getRequest("https://localhost:44393/api/todo",
+//       todos => {
+//           console.log(todos);
+//           app.innerHTML = Todos(todos);
+//       }
+//   )
+// });
 
