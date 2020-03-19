@@ -94,11 +94,17 @@ function navTodo() {
         const todoName = event.target.parentElement.querySelector('.update-todo__name').value;
         const todoOwner = event.target.parentElement.querySelector('.update-todo__owner').value;
 
+        console.log(todoId);
+
         const todoData = {
-          Id: todoId,
-          Name: todoName,
-          Owner: todoOwner
+          id: todoId,
+          name: todoName,
+          owner: todoOwner
         };
+
+        console.log(todoData);
+        console.log(JSON.stringify(todoData));
+
 
         apiActions.putRequest(
           `https://localhost:44393/api/todo/${todoId}`,
