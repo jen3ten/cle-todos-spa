@@ -35,7 +35,7 @@ namespace todos
         {
             // used for Web APIs to add MVC Controllers, but not Razor pages and Views
             // Adds services for Authorization, Validation, formattors, CORS, etc.
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(); ;
 
             // Not needed for Web APIs as it adds both Views and Razor Pages,
             // which are unnecessary for our Web API
