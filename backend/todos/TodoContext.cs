@@ -28,15 +28,39 @@ namespace todos
                 {
                     Id = 1,
                     Name = "Remodel Bathroom",
-                    Owner = "Mr. Handyman"
+                    OwnerId = 1
                 },
                 new Todo
                 {
                     Id = 2,
                     Name = "Clean out bedroom", 
-                    Owner = "Jen"
+                    OwnerId = 2
+                },
+                new Todo
+                {
+                    Id = 3,
+                    Name = "Mow lawn", 
+                    OwnerId = 3
                 }
             );
+
+            modelBuilder.Entity<Owner>().HasData(
+                new Owner
+                {
+                    Id = 1,
+                    Name = "Mr. Handyman"
+                }, 
+                new Owner
+                {
+                    Id = 2,
+                    Name = "Jen"
+                },
+                new Owner
+                {
+                    Id = 3,
+                    Name = "Mark"
+                }
+                );
         }
     }
 }

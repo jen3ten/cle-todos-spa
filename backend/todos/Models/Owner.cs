@@ -9,5 +9,7 @@ namespace todos.Models
     {
         public int Id { get; set; }
         public string  Name { get; set; }
+
+        public IEnumerable<Todo> Todos { get; set; }
     }
 }

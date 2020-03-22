@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace todos.Models
@@ -9,7 +10,10 @@ namespace todos.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Owner { get; set; }
+
+        [JsonIgnore]
+        public Owner Owner { get; set; }
+        public int OwnerId { get; set; }
 
     }
 }
