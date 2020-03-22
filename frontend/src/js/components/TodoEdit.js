@@ -6,7 +6,7 @@ export default function TodoEdit(todo){
 
         <section class="update-todo">
             <input class="update-todo__name" type="text" value="${todo.name}">
-            <input class="update-todo__owner" type="text" value="${todo.owner}">
+            <input class="update-todo__owner" type="text" value="${todo.owner.name}">
             <input class="update-todo__id" type="hidden" value="${todo.id}">
             <button class="update-todo__submit">Save Changes</button>
         </section>

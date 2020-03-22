@@ -7,6 +7,8 @@
   <ItemGroup>
     <Compile Remove="Migrations\20200322220834_OwnerModelAndSeedData.cs" />
     <Compile Remove="Migrations\20200322220834_OwnerModelAndSeedData.Designer.cs" />
+    <Compile Remove="Migrations\20200322233640_LazyLoading.cs" />
+    <Compile Remove="Migrations\20200322233640_LazyLoading.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
