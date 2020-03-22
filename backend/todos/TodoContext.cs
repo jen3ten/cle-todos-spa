@@ -34,7 +34,7 @@ namespace todos
                 new Todo
                 {
                     Id = 2,
-                    Name = "Clean out bedroom", 
+                    Name = "Clean out bedroom",
                     OwnerId = 2
                 },
                 new Todo

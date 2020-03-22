@@ -22,34 +22,41 @@ namespace todos.Controllers
         
         // GET: api/Owner
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Owner> Get()
         {
-            return new string[] { "value1", "value2" };
+            return ownerRepo.GetAll();
         }
 
         // GET: api/Owner/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        [HttpGet("{id}")]
+        public Owner Get(int id)
         {
-            return "value";
+            return ownerRepo.GetById(id);
         }
 
         // POST: api/Owner
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IEnumerable<Owner> Post([FromBody] Owner owner)
         {
+            ownerRepo.Create(owner);
+            return ownerRepo.GetAll();
         }
 
         // PUT: api/Owner/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IEnumerable<Owner> Put([FromBody] Owner owner)
         {
+            ownerRepo.Update(owner);
+            return ownerRepo.GetAll();
         }
 
-        // DELETE: api/ApiWithActions/5
+        // DELETE: api/Owner/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IEnumerable<Owner> Delete(int id)
         {
+            var owner = ownerRepo.GetById(id);
+            ownerRepo.Delete(owner);
+            return ownerRepo.GetAll();
         }
     }
 }
