@@ -10,6 +10,7 @@ namespace todos
     public class TodoContext : DbContext
     {
         public DbSet<Todo> Todos { get; set; }
+        public DbSet<Owner> Owners { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
