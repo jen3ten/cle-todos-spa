@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using todos.Models;
 using todos.Repositories;
 
@@ -35,7 +36,10 @@ namespace todos
         {
             // used for Web APIs to add MVC Controllers, but not Razor pages and Views
             // Adds services for Authorization, Validation, formattors, CORS, etc.
-            services.AddControllers().AddNewtonsoftJson(); ;
+            services.AddControllers().AddNewtonsoftJson(o =>
+            {
+                o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
 
             // Not needed for Web APIs as it adds both Views and Razor Pages,
             // which are unnecessary for our Web API
