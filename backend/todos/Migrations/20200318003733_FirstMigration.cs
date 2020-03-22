@@ -20,15 +20,15 @@ namespace todos.Migrations
                     table.PrimaryKey("PK_Todos", x => x.Id);
                 });
 
-            migrationBuilder.InsertData(
-                table: "Todos",
-                columns: new[] { "Id", "Name", "Owner" },
-                values: new object[] { 1, "Remodel Bathroom", "Mr. Handyman" });
+            //migrationBuilder.InsertData(
+            //    table: "Todos",
+            //    columns: new[] { "Id", "Name", "Owner" },
+            //    values: new object[] { 1, "Remodel Bathroom", "Mr. Handyman" });
 
-            migrationBuilder.InsertData(
-                table: "Todos",
-                columns: new[] { "Id", "Name", "Owner" },
-                values: new object[] { 2, "Clean out bedroom", "Jen" });
+            //migrationBuilder.InsertData(
+            //    table: "Todos",
+            //    columns: new[] { "Id", "Name", "Owner" },
+            //    values: new object[] { 2, "Clean out bedroom", "Jen" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
