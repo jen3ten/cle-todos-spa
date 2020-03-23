@@ -30,25 +30,20 @@ function navHome() {
   });
 }
 
+
+
 function navTodo() {
     const todosButton = document.querySelector(".nav__todos");
-    var ownerList;
 
     // Get Todos
     todosButton.addEventListener("click", function() {
-      apiActions.getRequest("https://localhost:44393/api/owner",
-        owners => {
-          console.log(owners); 
-          ownerList = owners.map(owner => {return owner.name}).sort();
-          console.log(ownerList)
-
-          }
-      )
-
       apiActions.getRequest("https://localhost:44393/api/todo",
           todos => {
-              // console.log(todos);
+            apiActions.getRequest("https://localhost:44393/api/owner",
+            ownerList => {
               app.innerHTML = Todos(todos, ownerList);
+              }
+            )
           }
       )
     });
@@ -61,10 +56,13 @@ function navTodo() {
 
         apiActions.deleteRequest(
           `https://localhost:44393/api/todo/${todoId}`,
-          toDos => {
-            app.innerHTML = Todos(toDos);
-          }
-        )
+          todos => {
+            //app.innerHTML = Todos(toDos);
+            apiActions.getRequest("https://localhost:44393/api/owner",
+            ownerList => {
+              app.innerHTML = Todos(todos, ownerList);
+              })
+          })
       }
     })
 
@@ -72,21 +70,27 @@ function navTodo() {
     app.addEventListener("click", function(){
         if(event.target.classList.contains('add-todo__submit')){
             const todo = event.target.parentElement.querySelector('.add-todo__todoName').value;
+            const ownerId = event.target.parentElement.querySelector('.add-todo__todoOwners').value;
+
             console.log(todo);
+            console.log(ownerId);
 
             var requestBody = {
               Name: todo,
-              OwnerId: 2
+              OwnerId: ownerId
             }
             apiActions.postRequest(
                 "https://localhost:44393/api/todo",
                 requestBody,
-                toDos => {
-                    console.log("Todos returned from back end");
-                    console.log(toDos);
-                    app.innerHTML = Todos(toDos);
-                }
-            )
+                todos => {
+                    // console.log("Todos returned from back end");
+                    // console.log(todos);
+                    //app.innerHTML = Todos(todos, ownerList);
+                    apiActions.getRequest("https://localhost:44393/api/owner",
+                      ownerList => {
+                      app.innerHTML = Todos(todos, ownerList);
+                    })
+                })
         }
     })
 
@@ -191,7 +195,7 @@ function navTodo() {
           if(event.target.classList.contains('edit-owner__submit')){
             const ownerId = event.target.parentElement.querySelector('.owner__id').value;
             console.log(ownerId);
-    
+
             apiActions.getRequest(
               `https://localhost:44393/api/owner/${ownerId}`,
               ownerEdit => {
@@ -201,23 +205,23 @@ function navTodo() {
             )
           }
         })
-    
+
         app.addEventListener("click", function(){
           if(event.target.classList.contains('update-owner__submit')){
             const ownerId = event.target.parentElement.querySelector('.update-owner__id').value;
             const ownerName = event.target.parentElement.querySelector('.update-owner__name').value;
-    
+
             console.log(ownerId);
-    
+
             const ownerData = {
               id: ownerId,
               name: ownerName
             };
-    
+
             console.log(ownerData);
             console.log(JSON.stringify(ownerData));
-    
-    
+
+
             apiActions.putRequest(
               `https://localhost:44393/api/owner/${ownerId}`,
               ownerData,
