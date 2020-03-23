@@ -1,4 +1,4 @@
-export default function Todos(todos){
+export default function Todos(todos, ownerList){
     return `
     <ol> 
         ${todos.map(todo => {

@@ -32,13 +32,23 @@ function navHome() {
 
 function navTodo() {
     const todosButton = document.querySelector(".nav__todos");
+    var ownerList;
 
     // Get Todos
     todosButton.addEventListener("click", function() {
+      apiActions.getRequest("https://localhost:44393/api/owner",
+        owners => {
+          console.log(owners); 
+          ownerList = owners.map(owner => {return owner.name}).sort();
+          console.log(ownerList)
+
+          }
+      )
+
       apiActions.getRequest("https://localhost:44393/api/todo",
           todos => {
-              console.log(todos);
-              app.innerHTML = Todos(todos);
+              // console.log(todos);
+              app.innerHTML = Todos(todos, ownerList);
           }
       )
     });
