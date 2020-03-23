@@ -1,5 +1,4 @@
 export default function Todos(todos){
-    console.log(`in the todo component ${todos}`)
     return `
     <ol> 
         ${todos.map(todo => {
