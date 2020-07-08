@@ -1,18 +1,37 @@
 import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Home from "./components/Home";
+import Todos from "./components/Todos";
 
-header();
+pageBuild();
+
+function pageBuild(){
+    header();
+    footer();
+    navHome();
+    navTodos();
+}
 
 function header() {
     const headerElement = document.querySelector('.header');
-    header.innerHTML = Header();
+    headerElement.innerHTML = Header();
+}
 
-    // header.innerHTML = 
-    // `<nav class="nav__header">
-    //     <ul>
-    //         <li>Home</li>
-    //         <li>ToDos</li>
-    //         <li>Owners</li>
-    //     </ul>
-    // </nav>
-    // `
+function footer(){
+    const footerElement = document.querySelector('.footer');
+    footerElement.innerHTML = Footer();
+}
+
+function navHome() {
+    const homeButton = document.querySelector('.nav__home');
+    homeButton.addEventListener('click', function(){
+        document.querySelector('.app').innerHTML = Home();
+    })
+}
+
+function navTodos() {
+    const todosButton = document.querySelector('.nav__todos');
+    todosButton.addEventListener('click', function(){
+        document.querySelector('.app').innerHTML = Todos();
+    })
 }
