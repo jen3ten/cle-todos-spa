@@ -29,9 +29,31 @@ function navHome() {
     })
 }
 
+
+
+// Show console log first
 function navTodos() {
     const todosButton = document.querySelector('.nav__todos');
     todosButton.addEventListener('click', function(){
-        document.querySelector('.app').innerHTML = Todos();
+        fetch('https://localhost:44393/api/todo')
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(err => console.log(err))
     })
 }
+
+// Then show fetch request in todos
+function navTodos() {
+    const todosButton = document.querySelector('.nav__todos');
+    todosButton.addEventListener('click', function(){
+        fetch('https://localhost:44393/api/todo')
+        .then(response => response.json())
+        .then(todos => {
+            
+            document.querySelector('.app').innerHTML = Todos(todos)
+        })
+        .catch(err => console.log(err))
+    })
+}
+
+// Then show generic fetch request using apiactions
