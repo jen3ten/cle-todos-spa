@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using todos.Models;
+using todos.Repositories;
 
 namespace todos.Controllers
 {
@@ -11,11 +13,18 @@ namespace todos.Controllers
     [ApiController]
     public class TodoController : ControllerBase
     {
+        private IRepository<Todo> todoRepo;
+
+        public TodoController(IRepository<Todo> todoRepo)
+        {
+            this.todoRepo = todoRepo;
+        }
+
         // GET: api/Todo
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Todo> Get()
         {
-            return new string[] { "value1", "value2" };
+            return todoRepo.GetAll();
         }
 
         // GET: api/Todo/5
