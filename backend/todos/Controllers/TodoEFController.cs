@@ -12,23 +12,23 @@ namespace todos.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TodosController : ControllerBase
+    public class TodoEFController : ControllerBase
     {
         private readonly TodoContext _context;
 
-        public TodosController(TodoContext context)
+        public TodoEFController(TodoContext context)
         {
             _context = context;
         }
 
-        // GET: api/Todos
+        // GET: api/TodoEF
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Todo>>> GetTodos()
         {
             return await _context.Todos.ToListAsync();
         }
 
-        // GET: api/Todos/5
+        // GET: api/TodoEF/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Todo>> GetTodo(int id)
         {
@@ -42,7 +42,7 @@ namespace todos.Controllers
             return todo;
         }
 
-        // PUT: api/Todos/5
+        // PUT: api/TodoEF/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
@@ -74,7 +74,7 @@ namespace todos.Controllers
             return NoContent();
         }
 
-        // POST: api/Todos
+        // POST: api/TodoEF
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
@@ -86,7 +86,7 @@ namespace todos.Controllers
             return CreatedAtAction("GetTodo", new { id = todo.Id }, todo);
         }
 
-        // DELETE: api/Todos/5
+        // DELETE: api/TodoEF/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Todo>> DeleteTodo(int id)
         {
