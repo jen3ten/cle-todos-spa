@@ -2,6 +2,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
 import Todos from "./components/Todos";
+import Owners from "./components/Owners"
 
 const appDiv = document.querySelector('.app'); 
 
@@ -50,7 +51,6 @@ function navTodos() {
         fetch('https://localhost:44393/api/todo')
         .then(response => response.json())
         .then(todos => {
-            
             appDiv.innerHTML = Todos(todos)
         })
         .catch(err => console.log(err))
@@ -62,6 +62,11 @@ function navTodos() {
 function navOwners() {
     const ownerButton = document.querySelector('.nav__owners');
     ownerButton.addEventListener('click', function(){
-        appDiv.innerText = "Owners";
+        fetch('https://localhost:44393/api/owner')
+        .then(response => response.json())
+        .then(owners => {
+            appDiv.innerHTML = Owners(owners)
+        })
+        .catch(err => console.log(err))
     })
 }
