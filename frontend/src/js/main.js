@@ -3,6 +3,8 @@ import Footer from "./components/Footer";
 import Home from "./components/Home";
 import Todos from "./components/Todos";
 
+const appDiv = document.querySelector('.app'); 
+
 pageBuild();
 
 function pageBuild(){
@@ -10,6 +12,7 @@ function pageBuild(){
     footer();
     navHome();
     navTodos();
+    navOwners();
 }
 
 function header() {
@@ -29,18 +32,16 @@ function navHome() {
     })
 }
 
-
-
 // Show console log first
-function navTodos() {
-    const todosButton = document.querySelector('.nav__todos');
-    todosButton.addEventListener('click', function(){
-        fetch('https://localhost:44393/api/todo')
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(err => console.log(err))
-    })
-}
+// function navTodos() {
+//     const todosButton = document.querySelector('.nav__todos');
+//     todosButton.addEventListener('click', function(){
+//         fetch('https://localhost:44393/api/todo')
+//         .then(response => response.json())
+//         .then(data => console.log(data))
+//         .catch(err => console.log(err))
+//     })
+// }
 
 // Then show fetch request in todos
 function navTodos() {
@@ -50,10 +51,17 @@ function navTodos() {
         .then(response => response.json())
         .then(todos => {
             
-            document.querySelector('.app').innerHTML = Todos(todos)
+            appDiv.innerHTML = Todos(todos)
         })
         .catch(err => console.log(err))
     })
 }
 
 // Then show generic fetch request using apiactions
+
+function navOwners() {
+    const ownerButton = document.querySelector('.nav__owners');
+    ownerButton.addEventListener('click', function(){
+        appDiv.innerText = "Owners";
+    })
+}
