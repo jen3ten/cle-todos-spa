@@ -6,9 +6,9 @@ import Owners from "./components/Owners"
 
 const appDiv = document.querySelector('.app'); 
 
-pageBuild();
+//pageBuild();
 
-function pageBuild(){
+export default function pageBuild(){
     header();
     footer();
     navHome();
