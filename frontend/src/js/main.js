@@ -2,7 +2,8 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
 import Todos from "./components/Todos";
-import Owners from "./components/Owners"
+import Owners from "./components/Owners";
+import Owner from "./components/Owner";
 
 const appDiv = document.querySelector('.app'); 
 
@@ -44,7 +45,7 @@ function ownerNameButton() {
             console.log(`owner name was clicked, owner id ${ownerId}`);
             fetch(`https://localhost:44393/api/owner/${ownerId}`)
             .then(response => response.json())
-            .then(owner => console.log(owner))
+            .then(owner => appDiv.innerHTML = Owner(owner))
             .catch(err => console.log(err))
         })
     })
