@@ -2,7 +2,8 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
 import Todos from "./components/Todos";
-import Owners from "./components/Owners"
+import Owners from "./components/Owners";
+import Owner from "./components/Owner";
 
 const appDiv = document.querySelector('.app'); 
 
@@ -14,6 +15,9 @@ export default function pageBuild(){
     navHome();
     navTodos();
     navOwners();
+    //ownerNameButton();
+    ownerNameButtonv2();
+    ownerNameButtonv3();
 }
 
 function header() {
@@ -30,6 +34,38 @@ function navHome() {
     const homeButton = document.querySelector('.nav__home');
     homeButton.addEventListener('click', function(){
         document.querySelector('.app').innerHTML = Home();
+    })
+}
+
+function ownerNameButton() {
+    const ownerNameElements = document.querySelectorAll('.owner__name');
+    ownerNameElements.forEach(element=> {
+        element.addEventListener('click', function(){
+            const ownerId = element.id;
+            console.log(`owner name was clicked, owner id ${ownerId}`);
+            fetch(`https://localhost:44393/api/owner/${ownerId}`)
+            .then(response => response.json())
+            .then(owner => appDiv.innerHTML = Owner(owner))
+            .catch(err => console.log(err))
+        })
+    })
+}
+
+function ownerNameButtonv2(){
+    appDiv.addEventListener('click', function(){
+        if(event.target.classList.contains('owner__name')){
+            const ownerIdv2 = event.target.id;
+            console.log(`owner name v2 was clicked, owner id ${ownerIdv2}`);
+        }
+    })
+}
+
+function ownerNameButtonv3(){
+    appDiv.addEventListener('click', function(){
+        if(event.target.classList.contains('owner__name')){
+            const ownerIdv3 = event.target.parentElement.querySelector('.owner__id').value;
+            console.log(`owner name v3 was clicked, owner id ${ownerIdv3}`);
+        }
     })
 }
 
@@ -66,6 +102,7 @@ function navOwners() {
         .then(response => response.json())
         .then(owners => {
             appDiv.innerHTML = Owners(owners)
+            ownerNameButton();
         })
         .catch(err => console.log(err))
     })
