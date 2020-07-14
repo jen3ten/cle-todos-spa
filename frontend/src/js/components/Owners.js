@@ -1,10 +1,13 @@
 export default function Owners(owners){
     return `
         <h1>List of Owners</h1>
-        <ul>
+        <ul class="owner__list">
             ${owners.map(owner => {
                 return `
-                <li>${owner.name}</li>
+                <li>
+                    <h4 class="owner__name" id="${owner.id}">${owner.name}</h4>
+                    <input class="owner__id" type="hidden" value="${owner.id}">
+                </li>
                 `
             }).join("")}
         </ul>

@@ -14,6 +14,9 @@ export default function pageBuild(){
     navHome();
     navTodos();
     navOwners();
+    //ownerNameButton();
+    ownerNameButtonv2();
+    ownerNameButtonv3();
 }
 
 function header() {
@@ -30,6 +33,32 @@ function navHome() {
     const homeButton = document.querySelector('.nav__home');
     homeButton.addEventListener('click', function(){
         document.querySelector('.app').innerHTML = Home();
+    })
+}
+
+function ownerNameButton() {
+    const ownerNameElements = document.querySelectorAll('.owner__name');
+    ownerNameElements.forEach(element=> {
+        element.addEventListener('click', function(){
+        console.log(`owner name was clicked, owner id ${element.id}`);})
+    })
+}
+
+function ownerNameButtonv2(){
+    appDiv.addEventListener('click', function(){
+        if(event.target.classList.contains('owner__name')){
+            const ownerId = event.target.id;
+            console.log(`owner name v2 was clicked, owner id ${ownerId}`);
+        }
+    })
+}
+
+function ownerNameButtonv3(){
+    appDiv.addEventListener('click', function(){
+        if(event.target.classList.contains('owner__name')){
+            const ownerIdValue = event.target.parentElement.querySelector('.owner__id').value;
+            console.log(`owner name v3 was clicked, owner id ${ownerIdValue}`);
+        }
     })
 }
 
@@ -66,6 +95,7 @@ function navOwners() {
         .then(response => response.json())
         .then(owners => {
             appDiv.innerHTML = Owners(owners)
+            ownerNameButton();
         })
         .catch(err => console.log(err))
     })
