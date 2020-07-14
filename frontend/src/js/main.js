@@ -40,15 +40,21 @@ function ownerNameButton() {
     const ownerNameElements = document.querySelectorAll('.owner__name');
     ownerNameElements.forEach(element=> {
         element.addEventListener('click', function(){
-        console.log(`owner name was clicked, owner id ${element.id}`);})
+            const ownerId = element.id;
+            console.log(`owner name was clicked, owner id ${ownerId}`);
+            fetch(`https://localhost:44393/api/owner/${ownerId}`)
+            .then(response => response.json())
+            .then(owner => console.log(owner))
+            .catch(err => console.log(err))
+        })
     })
 }
 
 function ownerNameButtonv2(){
     appDiv.addEventListener('click', function(){
         if(event.target.classList.contains('owner__name')){
-            const ownerId = event.target.id;
-            console.log(`owner name v2 was clicked, owner id ${ownerId}`);
+            const ownerIdv2 = event.target.id;
+            console.log(`owner name v2 was clicked, owner id ${ownerIdv2}`);
         }
     })
 }
@@ -56,8 +62,8 @@ function ownerNameButtonv2(){
 function ownerNameButtonv3(){
     appDiv.addEventListener('click', function(){
         if(event.target.classList.contains('owner__name')){
-            const ownerIdValue = event.target.parentElement.querySelector('.owner__id').value;
-            console.log(`owner name v3 was clicked, owner id ${ownerIdValue}`);
+            const ownerIdv3 = event.target.parentElement.querySelector('.owner__id').value;
+            console.log(`owner name v3 was clicked, owner id ${ownerIdv3}`);
         }
     })
 }
