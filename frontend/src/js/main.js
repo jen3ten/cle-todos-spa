@@ -4,6 +4,7 @@ import Home from "./components/Home";
 import Todos from "./components/Todos";
 import Owners from "./components/Owners";
 import Owner from "./components/Owner";
+import apiActions from "./api/apiActions";
 
 const appDiv = document.querySelector('.app'); 
 
@@ -83,27 +84,69 @@ function ownerNameButtonv3(){
 // Then show fetch request in todos
 function navTodos() {
     const todosButton = document.querySelector('.nav__todos');
+    const todosEndpoint = 'https://localhost:44393/api/todo';
+    const todosCallback = function(todos){
+        appDiv.innerHTML = Todos(todos)
+    }
     todosButton.addEventListener('click', function(){
-        fetch('https://localhost:44393/api/todo')
-        .then(response => response.json())
-        .then(todos => {
-            appDiv.innerHTML = Todos(todos)
-        })
-        .catch(err => console.log(err))
-    })
-}
+        apiActions.getRequest(todosEndpoint, todosCallback);
+    //     fetch('https://localhost:44393/api/todo')
+    //     .then(response => response.json())
+    //     .then(todos => {
+    //         appDiv.innerHTML = Todos(todos)
+    //     })
+    //     .catch(err => console.log(err))
+     })
+    }
 
 // Then show generic fetch request using apiactions
 
 function navOwners() {
     const ownerButton = document.querySelector('.nav__owners');
+    const ownersEndpoint = 'https://localhost:44393/api/owner';
+    const ownersCallback = owners => {
+        appDiv.innerHTML = Owners(owners)
+        ownerNameButton();
+    }
     ownerButton.addEventListener('click', function(){
-        fetch('https://localhost:44393/api/owner')
-        .then(response => response.json())
-        .then(owners => {
-            appDiv.innerHTML = Owners(owners)
-            ownerNameButton();
-        })
-        .catch(err => console.log(err))
+        apiActions.getRequest(ownersEndpoint,ownersCallback);
+        // fetch('https://localhost:44393/api/owner')
+        // .then(response => response.json())
+        // .then(owners => {
+        //     appDiv.innerHTML = Owners(owners)
+        //     ownerNameButton();
+        // })
+        // .catch(err => console.log(err))
     })
 }
+
+    // When the user clicks the submit Todo button, we will call the post fetch request
+    // and send the new values for Todo Name and Owner id to the backend
+    // and then redisplay the Owner component 
+    appDiv.addEventListener("click", function(){
+        if(event.target.classList.contains('owner__add-todo__submit')){
+            const ownerId = event.target.id;
+            const todoName = event.target.parentElement.querySelector('.owner__add-todo__name').value;
+            console.log(`owner id:${ownerId}, todo name:${todoName}`);
+
+            const requestBody = {
+                Name: todoName,
+                OwnerId: ownerId
+            }
+
+            const ownerCallback = (todos) => {
+                apiActions.getRequest(`https://localhost:44393/api/owner/${ownerId}`,
+                owner => {
+                    console.log(owner);
+                    appDiv.innerHTML = Owner(owner);
+                })
+            }
+
+            apiActions.postRequest(
+                `https://localhost:44393/api/todo`,
+                requestBody,
+                ownerCallback
+            )
+
+        }
+    })
