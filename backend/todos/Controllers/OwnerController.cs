@@ -36,8 +36,10 @@ namespace todos.Controllers
 
         // POST: api/Owner
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IEnumerable<Owner> Post([FromBody] Owner value)
         {
+            ownerRepo.Create(value);
+            return ownerRepo.GetAll();
         }
 
         // PUT: api/Owner/5
