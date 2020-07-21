@@ -2,6 +2,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
 import Todos from "./components/Todos";
+import TodoEdit from "./components/TodoEdit";
 import Owners from "./components/Owners";
 import Owner from "./components/Owner";
 import apiActions from "./api/apiActions";
@@ -161,6 +162,55 @@ appDiv.addEventListener("click", function(){
         apiActions.deleteRequest(
             `https://localhost:44393/api/todo/${todoId}`,
             todos => {
+                appDiv.innerHTML = Todos(todos);
+            }
+        )
+    }
+})
+
+// When the user clicks the edit button, we will call the get fetch request
+// to get the entire Todo object
+// and then display the Todo object in the TodoEdit form
+appDiv.addEventListener("click", function(){
+    if(event.target.classList.contains('todo-items__edit')){
+        const todoId = event.target.parentElement.querySelector('.todo-items__id').value;
+        console.log(todoId);
+
+        apiActions.getRequest(
+            `https://localhost:44393/api/todo/${todoId}`,
+            todoEdit => {
+                console.log(todoEdit);
+                appDiv.innerHTML = TodoEdit(todoEdit);
+            })
+    }
+})
+
+
+// When the user clicks the Save Changes button on the TodoEdit form
+// we will capture the data from the TodoEdit form
+// and call the put fetch request
+// and then redisplay the Todos component with the updated list of todos
+appDiv.addEventListener("click", function(){
+    if(event.target.classList.contains('edit-todo__submit')){
+        const todoId = event.target.parentElement.querySelector('.edit-todo__id').value;
+        const todoName = event.target.parentElement.querySelector('.edit-todo__name').value;
+        const todoOwner = event.target.parentElement.querySelector('.edit-todo__owner').value;
+
+        const todoData = {
+            id: todoId,
+            name: todoName,
+            ownerId: todoOwner
+            };
+
+        console.log(`todo data before fetch` );
+        console.log(todoData);
+
+        apiActions.putRequest(
+            `https://localhost:44393/api/todo/${todoId}`,
+            todoData,
+            todos => {
+                console.log(`todos returned from put action`);
+                console.log({todos});
                 appDiv.innerHTML = Todos(todos);
             }
         )
