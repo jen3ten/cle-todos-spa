@@ -4,7 +4,12 @@ export default function Todos(todos){
         <ol>
             ${todos.map(todo => {
                 return `
-                <li>${todo.name} by ${todo.owner.name}</li>
+                <li class='todo-items'>
+                    <h3>${todo.name} by ${todo.owner.name}</h3>
+                    <button class='todo-items__edit'>Edit</button>
+                    <button class='todo-items__delete'>Delete</button>
+                    <input class='todo-items__id' type='hidden' value='${todo.id}'>
+                </li>
                 `
             }).join("")}
         </ol>

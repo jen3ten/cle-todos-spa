@@ -120,33 +120,50 @@ function navOwners() {
     })
 }
 
-    // When the user clicks the submit Todo button, we will call the post fetch request
-    // and send the new values for Todo Name and Owner id to the backend
-    // and then redisplay the Owner component 
-    appDiv.addEventListener("click", function(){
-        if(event.target.classList.contains('owner__add-todo__submit')){
-            const ownerId = event.target.id;
-            const todoName = event.target.parentElement.querySelector('.owner__add-todo__name').value;
-            console.log(`owner id:${ownerId}, todo name:${todoName}`);
+// When the user clicks the submit Todo button, we will call the post fetch request
+// and send the new values for Todo Name and Owner id to the backend
+// and then redisplay the Owner component 
+appDiv.addEventListener("click", function(){
+    if(event.target.classList.contains('owner__add-todo__submit')){
+        const ownerId = event.target.id;
+        const todoName = event.target.parentElement.querySelector('.owner__add-todo__name').value;
+        console.log(`owner id:${ownerId}, todo name:${todoName}`);
 
-            const requestBody = {
-                Name: todoName,
-                OwnerId: ownerId
-            }
-
-            const ownerCallback = (todos) => {
-                apiActions.getRequest(`https://localhost:44393/api/owner/${ownerId}`,
-                owner => {
-                    console.log(owner);
-                    appDiv.innerHTML = Owner(owner);
-                })
-            }
-
-            apiActions.postRequest(
-                `https://localhost:44393/api/todo`,
-                requestBody,
-                ownerCallback
-            )
-
+        const requestBody = {
+            Name: todoName,
+            OwnerId: ownerId
         }
-    })
+
+        const ownerCallback = (todos) => {
+            apiActions.getRequest(`https://localhost:44393/api/owner/${ownerId}`,
+            owner => {
+                console.log(owner);
+                appDiv.innerHTML = Owner(owner);
+            })
+        }
+
+        apiActions.postRequest(
+            `https://localhost:44393/api/todo`,
+            requestBody,
+            ownerCallback
+        )
+
+    }
+})
+
+// When the user clicks the delete button, we will call the delete fetch request
+// and then redisplay the Todos component
+appDiv.addEventListener("click", function(){
+    if(event.target.classList.contains('todo-items__delete')){
+        const todoId = event.target.parentElement.querySelector('.todo-items__id').value;
+        console.log(todoId);
+
+        apiActions.deleteRequest(
+            `https://localhost:44393/api/todo/${todoId}`,
+            todos => {
+                appDiv.innerHTML = Todos(todos);
+            }
+        )
+    }
+})
+
