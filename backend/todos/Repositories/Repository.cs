@@ -16,7 +16,7 @@ namespace todos.Repositories
             this.db = db;
         }
 
-        public IEnumerable<T> GetAll()
+        public virtual IEnumerable<T> GetAll()
         {
             return db.Set<T>().ToList();
         }
