@@ -14,7 +14,7 @@ namespace todos
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var connectionString = "Server=(localdb)\\mssqllocaldb;Database=TodoApiSummer2020;Trusted_Connection=True;";
+            var connectionString = "Server=(localdb)\\mssqllocaldb;Database=TodoApiSummer2020_practice;Trusted_Connection=True;";
 
             optionsBuilder.UseSqlServer(connectionString).UseLazyLoadingProxies();
 
