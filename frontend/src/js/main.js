@@ -87,6 +87,7 @@ function navTodos() {
     const todosButton = document.querySelector('.nav__todos');
     const todosEndpoint = 'https://localhost:44393/api/todo';
     const todosCallback = function(todos){
+        console.log(todos);
         appDiv.innerHTML = Todos(todos)
     }
     todosButton.addEventListener('click', function(){

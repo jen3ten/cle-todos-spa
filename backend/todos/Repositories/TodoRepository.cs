@@ -16,9 +16,9 @@ namespace todos.Repositories
             db = context;
         }
 
-        //public override IEnumerable<Todo> GetAll()
-        //{
-        //    return db.Todos.Include("Owner").ToList();
-        //}
+        public override IEnumerable<Todo> GetAll()
+        {
+            return db.Todos.Include("Owner").ToList();
+        }
     }
 }
