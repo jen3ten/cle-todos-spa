@@ -33,8 +33,8 @@ namespace todos
         {
             services.AddControllers().AddNewtonsoftJson(o =>
             {
-                //o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-                o.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.Objects;
+                o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                //o.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.Objects;
             });
 
             services.AddDbContext<TodoContext>();
