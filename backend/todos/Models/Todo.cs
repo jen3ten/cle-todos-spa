@@ -11,7 +11,6 @@ namespace todos.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
-        [JsonIgnore]
         public virtual Owner Owner { get; set; }
         public int OwnerId { get; set; }
     }
