@@ -1,9 +1,14 @@
-// import Header from './components/Header';
+// component imports
+import Header from './components/Header';
 
-// header();
+export default function pageBuild(){
+    header();
+}
 
-// function header(){
-//     const headerElement = document.querySelector('.header');
-//     headerElement.innerHTML = Header();
-// }
+function header(){
+    const headerElement = document.querySelector('.header');
+    headerElement.innerHTML = Header();
+}
+
+
 
