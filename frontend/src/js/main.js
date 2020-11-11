@@ -1,9 +1,9 @@
-import Header from './components/Header';
+// import Header from './components/Header';
 
-export default header();
+// header();
 
-function header(){
-    const headerElement = document.querySelector('.header');
-    header.innerHTML = Header();
-}
+// function header(){
+//     const headerElement = document.querySelector('.header');
+//     headerElement.innerHTML = Header();
+// }
 
