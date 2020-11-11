@@ -13,7 +13,7 @@ namespace todos
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var connectionString = "Server=(localdb)\\mssqllocaldb;Database=TodoApiSummer2020;Trusted_Connection=True;";
+            var connectionString = "Server=(localdb)\\mssqllocaldb;Database=TodoApiFall2020Practice;Trusted_Connection=True;";
 
             optionsBuilder.UseSqlServer(connectionString);
 
@@ -27,39 +27,32 @@ namespace todos
                 {
                     Id = 1,
                     Name = "Remodel Bathroom",
-                    OwnerId = 1
+                    Owner = "Mr. Handyman"
                 },
                 new Todo
                 {
                     Id = 2,
                     Name = "Clean out bedroom",
-                    OwnerId = 2
+                    Owner = "Jen"
                 },
                 new Todo
                 {
                     Id = 3,
                     Name = "Text Mom",
-                    OwnerId = 3
+                    Owner = "Sarah"
                 },
                 new Todo
                 {
                     Id = 4,
                     Name = "Fix front doorstep",
-                    OwnerId = 1
+                    Owner = "Mark"
                 },
                 new Todo
                 {
                     Id = 5,
                     Name = "Listen to .NET Rocks! podcast",
-                    OwnerId = 2
-                },
-                new Todo
-                {
-                    Id = 6,
-                    Name = "Water plants",
-                    OwnerId = 2
+                    Owner = "Andy"
                 }
-
             );
 
         }
