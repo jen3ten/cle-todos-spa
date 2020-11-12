@@ -42,14 +42,21 @@ function footer(){
 function navHome(){
     const homeButton = document.querySelector('.nav__home');
     homeButton.addEventListener('click', function(){
-        document.querySelector('.app').innerHTML = Home();
+        appDiv.innerHTML = Home();
     })
 }
 
 function navTodos(){
     const todosButton = document.querySelector('.nav__todos');
     todosButton.addEventListener('click', function(){
-        document.querySelector('.app').innerHTML = Todos();
+        // appDiv.innerHTML = Todos(todos);
+        console.log('todos button clicked')
+        fetch("https://localhost:44393/api/todo")
+            .then(response => response.json())
+            .then(todos => {
+                appDiv.innerHTML = Todos(todos);
+            })
+            .catch(err => console.log(err))
     })
 }
 

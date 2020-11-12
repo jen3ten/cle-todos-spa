@@ -1,10 +1,21 @@
-export default function Todos(){
+export default function Todos(todos){
+    console.log("in todos component")
     return `
-        <h1>List of Todos</h1>
-        <ol>
-            <li>Buy groceries</li>
-            <li>Text Mom</li>
-            <li>Exercise</li>
-        </ol>
+    <h1>List of Todos</h1>
+    <ol>
+        ${todos.map(todo => {
+            return `
+                <li>${todo.name} by ${todo.owner}</li>
+            `
+        }).join("")}
+    </ol>
     `
+    // return `
+    //     <h1>List of Todos</h1>
+    //     <ol>
+    //         <li>Buy groceries</li>
+    //         <li>Text Mom</li>
+    //         <li>Exercise</li>
+    //     </ol>
+    // `
 }
