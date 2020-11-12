@@ -7,6 +7,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './components/Home';
 import Todos from './components/Todos';
+import Todo from './components/Todo';
 
 export default function pageBuild(){
     header();
@@ -56,6 +57,7 @@ function navTodos(){
             .then(todos => {
                 appDiv.innerHTML = Todos(todos);
                 todosInspire()
+                todoDetails()
             })
             .catch(err => console.log(err))
     })
@@ -73,6 +75,22 @@ function todosInspire(){
                 quoteElement.innerText = `${quote}`;
                 appDiv.appendChild(quoteElement);
             })
+    })
+}
+
+function todoDetails(){
+    const todoButtons = document.querySelectorAll('.todo__name');
+    todoButtons.forEach((todoButton) => {
+        todoButton.addEventListener('click', function(){
+            console.log(`todo details ${event.target.id} clicked`)
+            const todoId = event.target.id;
+            fetch(`https://localhost:44393/api/todo/${todoId}`)
+                .then(response => response.json())
+                .then(todo => {
+                    appDiv.innerHTML = Todo(todo);
+                })
+                .catch(err => console.log(err))
+        })
     })
 }
 

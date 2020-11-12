@@ -31,9 +31,10 @@ namespace todos.Controllers
 
         // GET api/<TodoController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Todo Get(int id)
         {
-            return "value";
+            // return "value";
+            return todoRepo.GetById(id);
         }
 
         // POST api/<TodoController>

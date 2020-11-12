@@ -5,11 +5,11 @@ export default function Todos(todos){
     <ol>
         ${todos.map(todo => {
             return `
-                <li>${todo.name} by ${todo.owner}</li>
+                <li><h3 class="todo__name" id="${todo.id}">${todo.name}</h3> by ${todo.owner}</li>
             `
         }).join("")}
     </ol>
-    <button class="todos__inspire">Inspire Me</button>
+    <button class="todos__inspire">Inspire Me with Ron Swanson</button>
     `
     // return `
     //     <h1>List of Todos</h1>
