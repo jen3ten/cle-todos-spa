@@ -55,8 +55,24 @@ function navTodos(){
             .then(response => response.json())
             .then(todos => {
                 appDiv.innerHTML = Todos(todos);
+                todosInspire()
             })
             .catch(err => console.log(err))
+    })
+
+}
+
+function todosInspire(){
+    const inspireButton = document.querySelector('.todos__inspire');
+    inspireButton.addEventListener('click', function(){
+        fetch("https://ron-swanson-quotes.herokuapp.com/v2/quotes")
+            .then(response => response.json())
+            .then(quote => {
+                inspireButton.remove();
+                const quoteElement = document.createElement('h3');
+                quoteElement.innerText = `${quote}`;
+                appDiv.appendChild(quoteElement);
+            })
     })
 }
 

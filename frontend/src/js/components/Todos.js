@@ -9,6 +9,7 @@ export default function Todos(todos){
             `
         }).join("")}
     </ol>
+    <button class="todos__inspire">Inspire Me</button>
     `
     // return `
     //     <h1>List of Todos</h1>
