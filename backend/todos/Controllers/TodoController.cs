@@ -39,20 +39,27 @@ namespace todos.Controllers
 
         // POST api/<TodoController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IEnumerable<Todo> Post([FromBody] Todo value)
         {
+            todoRepo.Create(value);
+            return todoRepo.GetAll();
         }
 
         // PUT api/<TodoController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IEnumerable<Todo> Put(int id, [FromBody] Todo todo)
         {
+            todoRepo.Update(todo);
+            return todoRepo.GetAll();
         }
 
         // DELETE api/<TodoController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IEnumerable<Todo> Delete(int id)
         {
+            var todo = todoRepo.GetById(id);
+            todoRepo.Delete(todo);
+            return todoRepo.GetAll();
         }
     }
 }

@@ -7,19 +7,18 @@ using todos.Models;
 
 namespace todos.Repositories
 {
-    public class TodoRepository : Repository<Todo>, IRepository<Todo>
+    public class OwnerRepository : Repository<Owner>, IRepository<Owner>
     {
         TodoContext db;
 
-        public TodoRepository(TodoContext context) : base(context)
+        public OwnerRepository(TodoContext context) : base(context)
         {
             db = context;
         }
 
-        public override IEnumerable<Todo> GetAll()
+        public override Owner GetById(int id)
         {
-            return db.Todos.Include("Owner").ToList();
+            return db.Owners.Where(o => o.Id == id).Include("Todos").FirstOrDefault();
         }
-
     }
 }
