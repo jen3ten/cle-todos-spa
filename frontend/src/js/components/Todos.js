@@ -5,7 +5,7 @@ export default function Todos(todos){
     <ol>
         ${todos.map(todo => {
             return `
-                <li><h3 class="todo__name" id="${todo.id}">${todo.name}</h3> by ${todo.owner}</li>
+                <li><h3 class="todo__name" id="${todo.id}">${todo.name}</h3> by ${todo.owner.name}</li>
             `
         }).join("")}
     </ol>

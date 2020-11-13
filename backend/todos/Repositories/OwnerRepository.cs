@@ -16,9 +16,9 @@ namespace todos.Repositories
             db = context;
         }
 
-        public override Owner GetById(int id)
-        {
-            return db.Owners.Where(o => o.Id == id).Include("Todos").FirstOrDefault();
-        }
+        //public override Owner GetById(int id)
+        //{
+        //    return db.Owners.Where(o => o.Id == id).Include("Todos").FirstOrDefault();
+        //}
     }
 }
