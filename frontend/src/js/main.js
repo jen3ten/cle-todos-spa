@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 import Home from './components/Home';
 import Todos from './components/Todos';
 import Todo from './components/Todo';
+import TodoEdit from './components/TodoEdit'
 import Owners from './components/Owners';
 import Owner from './components/Owner';
 
@@ -93,6 +94,7 @@ function ownerNameButton(){
                 appDiv.innerHTML = Owner(owner);
                 ownerAddTodo();
                 ownerDeleteTodo();
+                ownerEditTodo();
             })
             .catch(err => console.log(err))
         })
@@ -142,6 +144,61 @@ function ownerDeleteTodo(){
             })
             .catch(err => console.log(err))
         })
+    })
+}
+
+function ownerEditTodo(){
+    const ownerEditTodoButtons = document.querySelectorAll('.todo-item__edit')
+    ownerEditTodoButtons.forEach(button => {
+        button.addEventListener('click', function(){
+            const todoId = event.target.parentElement.querySelector('.todo-item__id').value;
+            console.log(todoId);
+            fetch(`https://localhost:44393/api/todo/${todoId}`)
+            .then(response => response.json())
+            .then(todo => {
+                appDiv.innerHTML = TodoEdit(todo);
+                editTodoSubmit();
+            })
+            .catch(err => console.log(err))
+        })
+    })
+}
+
+function editTodoSubmit(){
+    const editTodoSubmitButton = document.querySelector('.edit-todo__submit');
+    const editTodoSubmitButtonParent = editTodoSubmitButton.parentElement;
+    editTodoSubmitButton.addEventListener('click', function(){
+        const todoId = editTodoSubmitButtonParent.querySelector('.edit-todo__id').value;
+        const todoName = editTodoSubmitButtonParent.querySelector('.edit-todo__name').value;
+        const todoOwnerId = editTodoSubmitButtonParent.querySelector('.edit-todo__owner').value;
+
+        const todoData = {
+            id: todoId,
+            name: todoName,
+            ownerId: todoOwnerId
+        }
+
+        console.log(todoData)
+
+        fetch(`https://localhost:44393/api/todo/${todoId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(todoData)
+        })
+        // .then(response => response.json())
+        // .then(todos => {
+        //     appDiv.innerHTML = Todos(todos)
+        // })
+        .then(() => {
+            fetch(`https://localhost:44393/api/owner/${todoOwnerId}`)
+            .then(response => response.json())
+            .then(owner => {
+                appDiv.innerHTML = Owner(owner)
+            })
+        })
+        .catch(err => console.log(err))
     })
 }
 
