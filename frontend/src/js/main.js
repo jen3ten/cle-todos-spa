@@ -92,6 +92,7 @@ function ownerNameButton(){
             .then(owner => {
                 appDiv.innerHTML = Owner(owner);
                 ownerAddTodo();
+                ownerDeleteTodo();
             })
             .catch(err => console.log(err))
         })
@@ -123,9 +124,31 @@ function ownerAddTodo(){
     })
 }
 
+function ownerDeleteTodo(){
+    const ownerDeleteTodoButtons = document.querySelectorAll('.todo-item__delete')
+    ownerDeleteTodoButtons.forEach(button => {
+        button.addEventListener('click', function(){
+            const todoId = event.target.parentElement.querySelector('.todo-item__id').value;
+            console.log(todoId);
+            fetch(`https://localhost:44393/api/todo/${todoId}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            .then(response => response.json())
+            .then(todos => {
+                appDiv.innerHTML = Todos(todos)
+            })
+            .catch(err => console.log(err))
+        })
+    })
+}
+
 function todosInspire(){
     const inspireButton = document.querySelector('.todos__inspire');
     inspireButton.addEventListener('click', function(){
+        console.log('inspire clicked')
         fetch("https://ron-swanson-quotes.herokuapp.com/v2/quotes")
             .then(response => response.json())
             .then(quote => {
